@@ -34,6 +34,7 @@ public  class JanelaPrincipal extends JFrame{
             //Titulo
             textoBemVindo.setFont(fonteTitulo);
             getContentPane().add(textoBemVindo);
+            getContentPane().add(new JLabel(""));
             //Texto Operações
             operacoesMenu.setFont(fontOperacoes);
             getContentPane().add(operacoesMenu);
@@ -62,13 +63,5 @@ public  class JanelaPrincipal extends JFrame{
 
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-    public void espacoEmBranco(int numEspacos){
-        int i = 0;
-        while (i<= numEspacos) {
-                getContentPane().add(new JLabel(""));
-                i++;    
-        }
-        
-    }
+
 }
