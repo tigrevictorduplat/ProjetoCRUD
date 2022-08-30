@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 public  class JanelaPrincipal extends JFrame{
     GerenciadorEventos evento = new GerenciadorEventos();
+    CalculaPosicao calculadora = new CalculaPosicao();
     //Dimensões Iniciais
     private int alturaJanela = 260;
     private int larguraJanela = (int) Math.round(alturaJanela*1.777);
@@ -20,9 +21,6 @@ public  class JanelaPrincipal extends JFrame{
     private static Font fonteTitulo = new Font("Arial", Font.BOLD, 36);
     private static Font fontOperacoes = new Font("Arial",Font.PLAIN,16);
 
-    
-   
-
     public void inicializarPainel(){
          
         setTitle("Histórico de Dívidas");
@@ -30,15 +28,32 @@ public  class JanelaPrincipal extends JFrame{
         setMinimumSize(new Dimension(larguraJanelaMin,alturaJanelaMin));
 
         //Textos e Botões
-            setLayout(new FlowLayout());
+            setLayout(null);
             //Titulo
+           textoBemVindo.setBounds(
+                calculadora.calculaCentroX(larguraJanela),
+                (calculadora.calculaCentroY(alturaJanela, 0.05)),
+                calculadora.calculaTamanhoX(larguraJanela, 2),
+                calculadora.calculaTamanhoY(alturaJanela, 4)
+           );
             textoBemVindo.setFont(fonteTitulo);
             getContentPane().add(textoBemVindo);
-            getContentPane().add(new JLabel(""));
             //Texto Operações
+            operacoesMenu.setBounds(
+                calculadora.calculaCentroX(larguraJanela),
+                (calculadora.calculaCentroY(alturaJanela, 0.10)),
+                calculadora.calculaTamanhoX(larguraJanela, 6),
+                calculadora.calculaTamanhoY(alturaJanela, 6)
+           );
             operacoesMenu.setFont(fontOperacoes);
             getContentPane().add(operacoesMenu);
             // Botão Listar
+            botaoListar.setBounds(
+                calculadora.calculaCentroX(larguraJanela),
+                (calculadora.calculaCentroY(alturaJanela)),
+                calculadora.calculaTamanhoX(larguraJanela, 8),
+                calculadora.calculaTamanhoY(alturaJanela, 10)
+           );
             getContentPane().add(botaoListar);
             // getContentPane().add(botaoNovo);
         setLocationRelativeTo(null);
@@ -64,4 +79,5 @@ public  class JanelaPrincipal extends JFrame{
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    
 }
