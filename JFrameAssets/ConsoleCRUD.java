@@ -6,8 +6,9 @@ import ObjetosPessoas.*;
 public class ConsoleCRUD {
     public static void main(String[] args) {
         PonteJavaSQL crudSql = new PonteJavaSQL();
-        for (Pessoa pd : crudSql.listarPessoas() ) {
-            System.out.println(pd.getNomePessoa()+" é conhecido por ser "+pd.getFiliacaoPessoa()); 
+        for (PessoaDivida pd : crudSql.listarDividasPorPessoa() ) {
+            System.out.println(pd.getNomePessoaDivida()+" é conhecido por ser "+pd.getFiliacaoPessoaDivida());
+            System.out.println("Tem uma dívida de "+pd.getValorPessoaDivida()+" e tem "+pd.getPrazoDiasPessoaDivida()+" dias pra pagar."); 
         }
     }
     
