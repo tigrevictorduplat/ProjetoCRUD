@@ -40,6 +40,7 @@ public class Pessoa {
     }
 
     //Getters e Setters
+    
     public double getSaldoPessoa() {
         return saldoPessoa;
     }
@@ -70,6 +71,18 @@ public class Pessoa {
 
     public String getFiliacaoPessoa() {
         return filiacaoPessoa;
+    }
+
+    public void setNomePessoa(String nomePessoa) {
+        this.nomePessoa = nomePessoa;
+    }
+
+    public void setFiliacaoPessoa(String filiacaoPessoa) {
+        this.filiacaoPessoa = filiacaoPessoa;
+    }
+
+    public void setCreditoPrazo(int creditoPrazo) {
+        this.creditoPrazo = creditoPrazo;
     }
 
 
