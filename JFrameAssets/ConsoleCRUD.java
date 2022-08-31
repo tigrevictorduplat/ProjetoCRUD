@@ -1,14 +1,14 @@
 package JFrameAssets;
 
-import ConexaoSQL.PessoaSQL;
-//import ObjetosPessoas.*;
+import ConexaoSQL.PonteJavaSQL;
+import ObjetosPessoas.*;
 
 public class ConsoleCRUD {
     public static void main(String[] args) {
-        PessoaSQL crudSql = new PessoaSQL();
-        // Amigo tigre = new Amigo("Víctor Tigre", "IFBA");
-        // crudSql.inserir(tigre);
-
+        PonteJavaSQL crudSql = new PonteJavaSQL();
+        for (Pessoa pd : crudSql.listarPessoas() ) {
+            System.out.println(pd.getNomePessoa()+" é conhecido por ser "+pd.getFiliacaoPessoa()); 
+        }
     }
     
 }

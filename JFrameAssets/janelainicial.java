@@ -22,8 +22,8 @@ public class janelainicial extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					janelainicial frame = new janelainicial();
-					frame.setVisible(true);
+					janelainicial menuPrincipal = new janelainicial();
+					menuPrincipal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,11 +53,23 @@ public class janelainicial extends JFrame {
 		contentPane.add(textoMenu);
 		
 		JButton botaoLeia = new JButton("Abrir Tabela");
+
 		botaoLeia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evento.Listar();
+				
+				try {
+					dispose();
+					tabelaPessoaDivida janelaTabela = new tabelaPessoaDivida();
+					if (!(janelaTabela.isActive())){
+					janelaTabela.getLocation(null);
+					janelaTabela.setVisible(true);
+				}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 		});
+
 		botaoLeia.setFont(new Font("Monospaced", Font.BOLD, 12));
 		botaoLeia.setForeground(Color.DARK_GRAY);
 		botaoLeia.setBackground(Color.LIGHT_GRAY);
