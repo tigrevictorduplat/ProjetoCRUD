@@ -37,4 +37,15 @@ public class PessoaSQL {
         }
 
     }
+    public void listarDividasPorPessoa(Pessoa pessoa){
+        String sqlQuery = "select * from vw_PessoaDivida;";
+        Connection conexao = null;
+        PreparedStatement queryPreparada = null;
+
+        try {
+            
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
 }
