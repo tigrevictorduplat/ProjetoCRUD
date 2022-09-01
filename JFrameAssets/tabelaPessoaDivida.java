@@ -96,6 +96,9 @@ public class tabelaPessoaDivida extends JFrame {
 		botaoRetornar.setFont(new Font("Georgia", Font.BOLD, 16));
 		botaoRetornar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				janelainicial menuPrincipal = new janelainicial();
+				menuPrincipal.retornarMenu(menuPrincipal);
 			}
 		});
 		botaoRetornar.setBounds(23, 378, 482, 49);

@@ -55,6 +55,7 @@ public class senhaBancoDados extends JDialog {
 				botaoConfirmar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e){
 							ConexaoBanco.setSenhaBanco(campoSenha.getPassword().toString());
+							dispose();
 							tabelaPessoaDivida janelaTabela = new tabelaPessoaDivida();
 							if (!(janelaTabela.isActive())){
 							janelaTabela.getLocation(null);
@@ -75,9 +76,9 @@ public class senhaBancoDados extends JDialog {
 				JButton botaoCancelar = new JButton("Cancelar");
 				botaoCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						janelainicial menuPrincipal = new janelainicial();
 						dispose();
-						if(!menuPrincipal.isActive()){menuPrincipal.setVisible(true);}
+						janelainicial menuPrincipal = new janelainicial();
+						menuPrincipal.retornarMenu(menuPrincipal);
 						
 					}
 				});

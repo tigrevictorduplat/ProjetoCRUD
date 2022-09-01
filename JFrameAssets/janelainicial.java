@@ -75,4 +75,13 @@ public class janelainicial extends JFrame {
 		botaoLeia.setBounds(163, 184, 197, 31);
 		contentPane.add(botaoLeia);
 	}
+
+	public  void retornarMenu(janelainicial menuPrincipal) {
+		dispose();
+		if (!(menuPrincipal.isActive()))
+		{
+			menuPrincipal.getLocation(null);
+			menuPrincipal.setVisible(true);
+		}
+	}
 }
