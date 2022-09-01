@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,11 +60,9 @@ public class janelainicial extends JFrame {
 				
 				try {
 					dispose();
-					tabelaPessoaDivida janelaTabela = new tabelaPessoaDivida();
-					if (!(janelaTabela.isActive())){
-					janelaTabela.getLocation(null);
-					janelaTabela.setVisible(true);
-				}
+					senhaBancoDados popUpSenha = new senhaBancoDados();
+					popUpSenha.setVisible(true);
+					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}

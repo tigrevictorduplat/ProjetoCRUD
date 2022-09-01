@@ -92,13 +92,13 @@ public class tabelaPessoaDivida extends JFrame {
 		tabelaPessoaDivida.setBackground(Color.GRAY);
 		tabelaPessoaDivida.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
-		JButton botaoAddRow = new JButton("Adicionar Linha");
-		botaoAddRow.setFont(new Font("Georgia", Font.BOLD, 16));
-		botaoAddRow.addActionListener(new ActionListener() {
+		JButton botaoRetornar = new JButton("Retornar");
+		botaoRetornar.setFont(new Font("Georgia", Font.BOLD, 16));
+		botaoRetornar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		botaoAddRow.setBounds(23, 378, 482, 49);
-		contentPane.add(botaoAddRow);
+		botaoRetornar.setBounds(23, 378, 482, 49);
+		contentPane.add(botaoRetornar);
 	}
 }

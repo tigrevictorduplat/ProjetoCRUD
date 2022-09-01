@@ -15,9 +15,16 @@ public class ConexaoBanco {
 
     public static Connection conectarBancodeDados() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
-        senhaBanco = JOptionPane.showInputDialog(null, "Digite a senha de acesso ao banco: ", "Acesso ao Banco", JOptionPane.WARNING_MESSAGE);
-        Connection conexao = DriverManager.getConnection(urlConexao, usuarioBanco, senhaBanco);
+        Connection conexao = DriverManager.getConnection(urlConexao, usuarioBanco, getSenhaBanco());
         return conexao;
+    }
+
+    public static String getSenhaBanco() {
+        return senhaBanco;
+    }
+
+    public static void setSenhaBanco(String senhaBanco) {
+        ConexaoBanco.senhaBanco = senhaBanco;
     }
 
     public static void main(String[] args) throws Exception{
