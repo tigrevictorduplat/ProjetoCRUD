@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
@@ -54,16 +55,22 @@ public class senhaBancoDados extends JDialog {
 				JButton botaoConfirmar = new JButton("Confirmar");
 				botaoConfirmar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e){
-							ConexaoBanco.setSenhaBanco(campoSenha.getPassword().toString());
-							dispose();
-							tabelaPessoaDivida janelaTabela = new tabelaPessoaDivida();
-							if (!(janelaTabela.isActive())){
-							janelaTabela.getLocation(null);
-							janelaTabela.setVisible(true);
+						try {
+							String senhaTexto = campoSenha.getPassword().toString();
+							if(senhaTexto!=null){
+								ConexaoBanco.setSenhaBanco(senhaTexto);
+								dispose();
+								tabelaPessoaDivida janelaTabela = new tabelaPessoaDivida();
+								if (!(janelaTabela.isActive())){
+									janelaTabela.getLocation(null);
+									janelaTabela.setVisible(true);
+								}
+							} else {JOptionPane.showMessageDialog(null, "Campo Vazio!", "Senha Incorreta",2);}
+						}catch (Exception ex) {
+							ex.getStackTrace();
 						}
-						
-					}}
-					
+					}
+				}
 					
 				);
 				botaoConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 12));

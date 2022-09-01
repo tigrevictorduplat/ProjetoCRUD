@@ -9,8 +9,14 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import ConexaoSQL.PonteJavaSQL;
+import ObjetosPessoas.PessoaDivida;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JScrollPane;
@@ -20,7 +26,6 @@ public class tabelaPessoaDivida extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tabelaPessoaDivida;
-	private DefaultTableModel modeloTabela;
 	private JScrollPane painelTabela;
 
 	/**
@@ -43,6 +48,7 @@ public class tabelaPessoaDivida extends JFrame {
 	 * Create the frame.
 	 */
 	public tabelaPessoaDivida() {
+		PonteJavaSQL crudSql = new PonteJavaSQL();
 		setTitle("Histórico dos Devedores");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,24 +64,33 @@ public class tabelaPessoaDivida extends JFrame {
 		painelTabela.setBounds(31, 18, 463, 349);
 		contentPane.add(painelTabela);
 		
+		
 		//Criando a Tabela
+		String nomeColunas[] = {"ID", "Nome", "R$", "Filia\u00E7\u00E3o", "Prazo de Devolu\u00E7\u00E3o", "Data da Opera\u00E7\u00E3o"};
+		DefaultTableModel modelo = new DefaultTableModel(nomeColunas,0);
 		tabelaPessoaDivida = new JTable();
 		painelTabela.setViewportView(tabelaPessoaDivida);
-		tabelaPessoaDivida.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"ID", "Nome", "R$", "Filia\u00E7\u00E3o", "Prazo de Devolu\u00E7\u00E3o", "Data da Opera\u00E7\u00E3o"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Double.class, String.class, Integer.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		tabelaPessoaDivida.setModel(modelo);
+
+		//Resgatando dados da View DividaPessoa 
+		int i= 0;
+		for (PessoaDivida pd : crudSql.listarDividasPorPessoa() ) {
+			int j =0;
+			modelo.setValueAt(pd.getIdPessoaDivida(), i, j);
+			j++;
+			modelo.setValueAt(pd.getNomePessoaDivida(), i, j);
+			j++;
+			modelo.setValueAt(pd.getValorPessoaDivida(), i, j);
+			j++;
+			modelo.setValueAt(pd.getFiliacaoPessoaDivida(), i, j);
+			j++;
+			modelo.setValueAt(pd.getPrazoDiasPessoaDivida(), i, j);
+			j++;
+			modelo.setValueAt(pd.getDataOperacaoPessoaDivida().toString(), i, j);
+			i++;
+		}
+		i = 0;
+
 		tabelaPessoaDivida.getColumnModel().getColumn(0).setResizable(false);
 		tabelaPessoaDivida.getColumnModel().getColumn(0).setPreferredWidth(24);
 		tabelaPessoaDivida.getColumnModel().getColumn(2).setResizable(false);
@@ -90,7 +105,7 @@ public class tabelaPessoaDivida extends JFrame {
 		tabelaPessoaDivida.setFont(new Font("Georgia", Font.PLAIN, 12));
 		tabelaPessoaDivida.setRowSelectionAllowed(false);
 		tabelaPessoaDivida.setBackground(Color.GRAY);
-		tabelaPessoaDivida.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tabelaPessoaDivida.setBorder(new LineBorder(Color.WHITE));
 		
 		JButton botaoRetornar = new JButton("Retornar");
 		botaoRetornar.setFont(new Font("Georgia", Font.BOLD, 16));

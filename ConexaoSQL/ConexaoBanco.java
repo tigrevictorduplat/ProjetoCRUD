@@ -13,10 +13,16 @@ public class ConexaoBanco {
     //Caminho do Banco - porta + nomebanco
     private static final String urlConexao = "jdbc:mysql://localhost:3306/bancodivida";
 
-    public static Connection conectarBancodeDados() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conexao = DriverManager.getConnection(urlConexao, usuarioBanco, getSenhaBanco());
-        return conexao;
+    public static Connection conectarBancodeDados(String conexaoSenhaBanco){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexao = DriverManager.getConnection(urlConexao, usuarioBanco, conexaoSenhaBanco);
+            return conexao;        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Algo deu errado na conexão...", "Incapaz de Conectar",2);
+            e.getStackTrace();
+            return null;
+        }  
     }
 
     public static String getSenhaBanco() {
@@ -28,7 +34,7 @@ public class ConexaoBanco {
     }
 
     public static void main(String[] args) throws Exception{
-        Connection conexao = conectarBancodeDados();
+        Connection conexao = conectarBancodeDados(ConexaoBanco.getSenhaBanco());
     if (conexao != null) {
         JOptionPane.showMessageDialog(null, "Conexão Obtida com Sucesso!");
         conexao.close();

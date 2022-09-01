@@ -19,7 +19,7 @@ public class PonteJavaSQL {
 
         try {
             
-            conexao = ConexaoBanco.conectarBancodeDados();
+            conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
             queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
             queryPreparada.setString(1, pessoa.getNomePessoa());
             queryPreparada.setDouble(2 , pessoa.getSaldoPessoa());
@@ -50,7 +50,7 @@ public class PonteJavaSQL {
         ResultSet retorno = null;
 
         try {
-        conexao = ConexaoBanco.conectarBancodeDados();
+        conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
         queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
         retorno = queryPreparada.executeQuery();
         while (retorno.next()) {
@@ -97,7 +97,7 @@ public class PonteJavaSQL {
         ResultSet retorno = null;
 
         try {
-        conexao = ConexaoBanco.conectarBancodeDados();
+        conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
         queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
         retorno = queryPreparada.executeQuery();
         System.out.println("Conexão Estabelecida!");
