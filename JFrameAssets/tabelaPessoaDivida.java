@@ -70,23 +70,24 @@ public class tabelaPessoaDivida extends JFrame {
 		tabelaPessoaDivida.setModel(modelo);
 
 		//Resgatando dados da View DividaPessoa 
-		int i= 0;
 		for (PessoaDivida pd : crudSql.listarDividasPorPessoa() ) {
-			int j =0;
-			modelo.setValueAt(pd.getIdPessoaDivida(), i, j);
-			j++;
-			modelo.setValueAt(pd.getNomePessoaDivida(), i, j);
-			j++;
-			modelo.setValueAt(pd.getValorPessoaDivida(), i, j);
-			j++;
-			modelo.setValueAt(pd.getFiliacaoPessoaDivida(), i, j);
-			j++;
-			modelo.setValueAt(pd.getPrazoDiasPessoaDivida(), i, j);
-			j++;
-			modelo.setValueAt(pd.getDataOperacaoPessoaDivida().toString(), i, j);
-			i++;
+			var id = pd.getIdPessoaDivida();
+			var nome = pd.getNomePessoaDivida();
+			var valor = pd.getValorPessoaDivida();
+			var filiacao = pd.getFiliacaoPessoaDivida();
+			var prazo = pd.getPrazoDiasPessoaDivida();
+			var data = pd.getDataOperacaoPessoaDivida();
+			Object[] infosLinha ={
+				id,
+				nome,
+				valor,
+				filiacao,
+				prazo,
+				data
+			};
+
+			modelo.addRow(infosLinha);
 		}
-		i = 0;
 
 		tabelaPessoaDivida.getColumnModel().getColumn(0).setResizable(false);
 		tabelaPessoaDivida.getColumnModel().getColumn(0).setPreferredWidth(24);
