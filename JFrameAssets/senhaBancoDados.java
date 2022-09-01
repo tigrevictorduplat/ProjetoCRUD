@@ -56,8 +56,8 @@ public class senhaBancoDados extends JDialog {
 				botaoConfirmar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e){
 						try {
-							String senhaTexto = campoSenha.getPassword().toString();
-							if(senhaTexto!=null){
+							String senhaTexto = String.valueOf(campoSenha.getPassword());
+							if(senhaTexto.isEmpty()==false){
 								ConexaoBanco.setSenhaBanco(senhaTexto);
 								dispose();
 								tabelaPessoaDivida janelaTabela = new tabelaPessoaDivida();

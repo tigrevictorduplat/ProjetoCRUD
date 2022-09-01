@@ -21,8 +21,8 @@ public class ConexaoBanco {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algo deu errado na conexão...", "Incapaz de Conectar",2);
             e.getStackTrace();
-            return null;
-        }  
+        }
+        return null;
     }
 
     public static String getSenhaBanco() {
