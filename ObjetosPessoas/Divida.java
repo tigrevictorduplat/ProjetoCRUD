@@ -10,8 +10,7 @@ public class Divida {
     private String motivoEmprestimo;
 
     //Construtor
-     public Divida(int idDivida, double valorDivida, Date dataDivida, int prazoDias) {
-        this.idDivida = idDivida;
+     public Divida( double valorDivida, java.sql.Date dataDivida, int prazoDias) {
         this.valorDivida = valorDivida;
         this.dataDivida = dataDivida;
         this.prazoDias = prazoDias;
@@ -30,10 +29,10 @@ public class Divida {
     public void setValorDivida(double valorDivida) {
         this.valorDivida = valorDivida;
     }
-    public Date getDataDivida() {
-        return dataDivida;
+    public java.sql.Date getDataDivida() {
+        return (java.sql.Date) dataDivida;
     }
-    public void setDataDivida(Date dataDivida) {
+    public void setDataDivida(java.sql.Date dataDivida) {
         this.dataDivida = dataDivida;
     }
     public int getPrazoDias() {

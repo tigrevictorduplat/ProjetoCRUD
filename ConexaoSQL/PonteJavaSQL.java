@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import ObjetosPessoas.Divida;
 import ObjetosPessoas.Pessoa;
 import ObjetosPessoas.PessoaDivida;
 
 public class PonteJavaSQL {
     
-    public void inserir(Pessoa pessoa) {
+    public void inserirPessoa(Pessoa pessoa) {
        
       String sqlQuery = "insert into tb_Pessoa (Nome, Saldo, Filiacao, Limite, CreditoPrazo) values (?,?,?,?,?);";
       Connection conexao = null;
@@ -40,6 +41,73 @@ public class PonteJavaSQL {
             }
         }
 
+    }
+    
+    public void updatePessoa (Pessoa pessoa, int idPessoaCadastrada){
+
+        String sqlQuery = "update tb_Pessoa set Nome = ?, Saldo= ?, Filiacao= ?, Limite= ?, CreditoPrazo= ?)"+
+        "where idPessoa = ?";
+      Connection conexao = null;
+      PreparedStatement queryPreparada = null;
+
+        try {
+            
+            conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
+            queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
+            queryPreparada.setString(1, pessoa.getNomePessoa());
+            queryPreparada.setDouble(2 , pessoa.getSaldoPessoa());
+            queryPreparada.setString(3, pessoa.getFiliacaoPessoa());
+            queryPreparada.setDouble(4, pessoa.getLimiteEmprestimo());
+            queryPreparada.setDouble(5, pessoa.getCreditoPrazo());
+            queryPreparada.setInt(6, idPessoaCadastrada);
+            queryPreparada.execute();
+
+            System.out.println("Pessoa Atualizada com sucesso!");
+        } catch (Exception e) {
+            e.getStackTrace();
+        } finally {
+            try {
+                if (conexao != null) {conexao.close();}
+                if (queryPreparada != null) {queryPreparada.close();}
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+
+
+    }
+    public void inserirDivida (Divida divida , int idPessoaCadastrada){
+        String sqlQuery = "insert into tb_Divida (idPessoa, Valor, DataOperacao, PrazoDevolucao, MotivoEmprestimo)"+
+        "values (?, ?, ?, ?,?);";
+      Connection conexao = null;
+      PreparedStatement queryPreparada = null;
+
+        try {
+            
+            conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
+            queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
+            queryPreparada.setInt(1, idPessoaCadastrada);
+            queryPreparada.setDouble(2 , divida.getValorDivida());
+            queryPreparada.setDate(3, divida.getDataDivida());
+            queryPreparada.setInt(4, divida.getPrazoDias());
+            queryPreparada.setString(5, divida.getMotivoEmprestimo());
+            queryPreparada.execute();
+
+            System.out.println("Divida cadastrada com sucesso!");
+        } catch (Exception e) {
+            e.getStackTrace();
+        } finally {
+            try {
+                if (conexao != null) {conexao.close();}
+                if (queryPreparada != null) {queryPreparada.close();}
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+
+    }
+    public void updateDivida (Divida divida){
+        
     }
     public List<PessoaDivida> listarDividasPorPessoa(){
         System.out.println("Chamada da Função!");
@@ -87,7 +155,6 @@ public class PonteJavaSQL {
         }
     return infoPessoasDividas;
     }
-
     public List<Pessoa> listarPessoas(){
         System.out.println("Chamada da Função!");
         List<Pessoa> infoPessoas = new ArrayList<Pessoa>();
@@ -126,4 +193,5 @@ public class PonteJavaSQL {
         }
     return infoPessoas;
     }
+    
 }
