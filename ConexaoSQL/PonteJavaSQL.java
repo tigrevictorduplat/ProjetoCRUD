@@ -155,8 +155,36 @@ public class PonteJavaSQL {
         }
     return infoPessoasDividas;
     }
+    public Pessoa consultaPessoa(Pessoa pessoa, int idPessoaCadastrada) {
+        String sqlQuery = "select * from tb_Pessoa where idPessoa = ?";
+        Connection conexao = null;
+        PreparedStatement queryPreparada = null;
+        ResultSet retorno = null;
+
+        try {
+        conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
+        queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
+        retorno = queryPreparada.executeQuery();
+                pessoa.setIdPessoa(retorno.getInt("idPessoa"));
+                pessoa.setNomePessoa(retorno.getString("Nome"));
+                pessoa.setSaldoPessoa(retorno.getDouble("Saldo"));
+                pessoa.setFiliacaoPessoa(retorno.getString("Filiacao"));
+                pessoa.setLimiteEmprestimo(retorno.getDouble("Limite"));
+                pessoa.setCreditoPrazo(retorno.getInt("CreditoPrazo"));
+        } catch (Exception e) {
+            e.getStackTrace();
+        } finally {
+            try {
+                if (retorno!=null) { retorno.close();}
+                if (queryPreparada!=null) { queryPreparada.close();}
+                if (conexao!=null) { conexao.close();}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } return pessoa;
+    }
+
     public List<Pessoa> listarPessoas(){
-        System.out.println("Chamada da Função!");
         List<Pessoa> infoPessoas = new ArrayList<Pessoa>();
         String sqlQuery = "select * from tb_Pessoa";
         Connection conexao = null;
@@ -167,17 +195,16 @@ public class PonteJavaSQL {
         conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
         queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
         retorno = queryPreparada.executeQuery();
-        System.out.println("Conexão Estabelecida!");
         while (retorno.next()) {
-            System.out.println("Entrou no While");
             Pessoa objPessoa = new Pessoa(
                 retorno.getInt("idPessoa"),
                 retorno.getString("Nome"),
-                retorno.getString("Filiacao")
+                retorno.getDouble("Saldo"),
+                retorno.getString("Filiacao"),
+                retorno.getDouble("Limite"),
+                retorno.getInt("CreditoPrazo")
                 );
-            System.out.println("Objeto Criado");
             infoPessoas.add(objPessoa);
-            System.out.println("Objeto Adcionado");
         }
 
         } catch (Exception e) {

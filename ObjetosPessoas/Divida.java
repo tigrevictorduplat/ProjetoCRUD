@@ -1,15 +1,20 @@
 package ObjetosPessoas;
 
-import java.util.Date;
-
 public class Divida {
     private int idDivida;
     private double valorDivida;
-    private Date dataDivida;
+    private java.sql.Date dataDivida;
     private int prazoDias;
     private String motivoEmprestimo;
 
     //Construtor
+    public Divida(int idDivida, double valorDivida, java.sql.Date dataDivida, int prazoDias, String motivoEmprestimo) {
+        this.idDivida = idDivida;
+        this.valorDivida = valorDivida;
+        this.dataDivida = dataDivida;
+        this.prazoDias = prazoDias;
+        this.motivoEmprestimo = motivoEmprestimo;
+    }
      public Divida( double valorDivida, java.sql.Date dataDivida, int prazoDias) {
         this.valorDivida = valorDivida;
         this.dataDivida = dataDivida;

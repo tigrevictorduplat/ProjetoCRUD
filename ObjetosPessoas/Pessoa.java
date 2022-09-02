@@ -5,6 +5,21 @@ public class Pessoa {
     private int creditoPrazo, idPessoa;
 
     //Construtores - Polimorfismo
+    public Pessoa(int idPessoa, String nomePessoa, double saldoPessoa, String filiacaoPessoa, double limiteEmprestimo,
+    int creditoPrazo) {
+    this.nomePessoa = nomePessoa;
+    this.filiacaoPessoa = filiacaoPessoa;
+    this.saldoPessoa = saldoPessoa;
+    this.limiteEmprestimo = limiteEmprestimo;
+    this.creditoPrazo = creditoPrazo;
+    this.idPessoa = idPessoa;
+    }
+
+    public Pessoa(){
+        this.saldoPessoa = 0;
+        this.limiteEmprestimo = 0;
+        this.creditoPrazo = 0;  
+    };
     public Pessoa( String nomePessoa, String filiacaoPessoa) {
         this.nomePessoa = nomePessoa;
         this.filiacaoPessoa = filiacaoPessoa;
@@ -21,8 +36,7 @@ public class Pessoa {
         this.nomePessoa = nomePessoa;
         this.filiacaoPessoa = filiacaoPessoa;
     }
-    //Metódos Principais
-    
+    //Metódos Principais   
     public void pegarEmprestimo(double valorEmprestimo){
         setSaldoPessoa(saldoPessoa-valorEmprestimo);
        if (saldoPessoa<0) {
