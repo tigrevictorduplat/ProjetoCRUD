@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class janelainicial extends JFrame {
-	GerenciadorEventos evento =  new GerenciadorEventos();
 	private JPanel contentPane;
 
 	/**
