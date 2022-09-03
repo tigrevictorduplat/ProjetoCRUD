@@ -12,12 +12,12 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import ConexaoSQL.ConexaoBanco;
+import ConexaoSQL.ConectorBancoDados;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class senhaBancoDados extends JDialog {
+public class painelDialogoSenha extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JPasswordField campoSenha;
@@ -27,9 +27,9 @@ public class senhaBancoDados extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			senhaBancoDados popUpSenha = new senhaBancoDados();
-			popUpSenha.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			popUpSenha.setVisible(true);
+			painelDialogoSenha painelDialogoSenha = new painelDialogoSenha();
+			painelDialogoSenha.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			painelDialogoSenha.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,7 +38,7 @@ public class senhaBancoDados extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public senhaBancoDados() {
+	public painelDialogoSenha() {
 		setType(Type.POPUP);
 		setTitle("Senha de Acesso");
 		setBounds(100, 100, 450, 255);
@@ -56,16 +56,16 @@ public class senhaBancoDados extends JDialog {
 				botaoConfirmar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e){
 						try {
-							String senhaTexto = String.valueOf(campoSenha.getPassword());
-							if(senhaTexto.isEmpty()==false){
-								ConexaoBanco.setSenhaBanco(senhaTexto);
+							String senhaInput = String.valueOf(campoSenha.getPassword());
+							if(senhaInput.isEmpty()==false){
+								ConectorBancoDados.setSenhaConexao(senhaInput);
 								dispose();
-								tabelaPessoaDivida janelaTabela = new tabelaPessoaDivida();
+								tabelaChecagemAgenda janelaTabela = new tabelaChecagemAgenda();
 								if (!(janelaTabela.isActive())){
 									janelaTabela.getLocation(null);
 									janelaTabela.setVisible(true);
 								}
-							} else {JOptionPane.showMessageDialog(null, "Campo Vazio!", "Senha Incorreta",2);}
+							} else {JOptionPane.showMessageDialog(null, "Digite uma senha!", "Campo Nulo",2);}
 						}catch (Exception ex) {
 							ex.getStackTrace();
 						}
@@ -85,7 +85,7 @@ public class senhaBancoDados extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 						janelainicial menuPrincipal = new janelainicial();
-						menuPrincipal.retornarMenu(menuPrincipal);
+						menuPrincipal.voltarAoMenu(menuPrincipal);
 						
 					}
 				});

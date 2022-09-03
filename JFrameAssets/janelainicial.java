@@ -17,7 +17,7 @@ public class janelainicial extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -35,31 +35,26 @@ public class janelainicial extends JFrame {
 	 */
 	public janelainicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 544, 365);
+		setBounds(100, 100, 476, 232);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel textoTitulo = new JLabel("Bem vindo(a) ao Histórico de Dívidas!");
+		JLabel textoTitulo = new JLabel("Sua Agenda PetWalker!");
 		textoTitulo.setFont(new Font("Georgia", Font.PLAIN, 30));
-		textoTitulo.setBounds(10, 10, 510, 79);
+		textoTitulo.setBounds(49, 10, 323, 79);
 		contentPane.add(textoTitulo);
 		
-		JLabel textoMenu = new JLabel("Selecione a operação desejada:");
-		textoMenu.setFont(new Font("Georgia", Font.PLAIN, 16));
-		textoMenu.setBounds(153, 143, 224, 31);
-		contentPane.add(textoMenu);
-		
-		JButton botaoLeia = new JButton("Abrir Tabela");
+		JButton botaoAbrirAgenda = new JButton("Abrir Agenda");
 
-		botaoLeia.addActionListener(new ActionListener() {
+		botaoAbrirAgenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
 					dispose();
-					senhaBancoDados popUpSenha = new senhaBancoDados();
-					popUpSenha.setVisible(true);
+					painelDialogoSenha painelSenha = new painelDialogoSenha();
+					painelSenha.setVisible(true);
 					
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -67,14 +62,14 @@ public class janelainicial extends JFrame {
 			}
 		});
 
-		botaoLeia.setFont(new Font("Monospaced", Font.BOLD, 12));
-		botaoLeia.setForeground(Color.DARK_GRAY);
-		botaoLeia.setBackground(Color.LIGHT_GRAY);
-		botaoLeia.setBounds(163, 184, 197, 31);
-		contentPane.add(botaoLeia);
+		botaoAbrirAgenda.setFont(new Font("Monospaced", Font.BOLD, 12));
+		botaoAbrirAgenda.setForeground(Color.DARK_GRAY);
+		botaoAbrirAgenda.setBackground(new Color(204, 153, 153));
+		botaoAbrirAgenda.setBounds(131, 119, 197, 31);
+		contentPane.add(botaoAbrirAgenda);
 	}
 
-	public  void retornarMenu(janelainicial menuPrincipal) {
+	public  void voltarAoMenu(janelainicial menuPrincipal) {
 		dispose();
 		if (!(menuPrincipal.isActive()))
 		{

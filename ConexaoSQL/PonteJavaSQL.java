@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import ObjetosPessoas.*;
+import ClassesPrincipais.*;
 
 public class PonteJavaSQL {
     public List<PessoaDivida> listarDividasPorPessoa(){
@@ -20,7 +20,7 @@ public class PonteJavaSQL {
         ResultSet retorno = null;
 
         try {
-        conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
+        conexao = ConectorBancoDados.conexaoBanco(ConectorBancoDados.getSenhaConexao());
         queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
         retorno = queryPreparada.executeQuery();
         while (retorno.next()) {
@@ -66,7 +66,7 @@ public class PonteJavaSQL {
         ResultSet retorno = null;
 
         try {
-        conexao = ConexaoBanco.conectarBancodeDados(ConexaoBanco.getSenhaBanco());
+        conexao = ConectorBancoDados.conexaoBanco(ConectorBancoDados.getSenhaConexao());
         queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
         retorno = queryPreparada.executeQuery();
         while (retorno.next()) {
@@ -98,11 +98,11 @@ public static void main(String[] args) {
     PonteJavaSQL crudSql = new PonteJavaSQL();
     String senhaBanco = JOptionPane.showInputDialog(null,
                                     "Digite aqui a senha do Banco de Dados:", "Senha Banco de Dados", 2);
-    ConexaoBanco.setSenhaBanco(senhaBanco);
+    ConectorBancoDados.setSenhaConexao(senhaBanco);
     for (Pessoa pd : crudSql.listarPessoas()) {
        System.out.println(pd.getNomePessoa()+" tem um saldo de "+ pd.getSaldoPessoa());
     }
-    ConexaoBanco.setSenhaBanco("");
+    ConectorBancoDados.setSenhaConexao("");
 
 }
 }
