@@ -40,3 +40,11 @@ from tb_divida as D , tb_pessoa as P
 where D.idPessoa = P.idPessoa;
 
 select * from vw_PessoaDivida;
+
+insert tb_Pessoa (Nome, Saldo, Filiacao, Limite, CreditoPrazo) values ("Augusto Barros", -100, "IFBA",0,2);
+insert into tb_Divida (idPessoa, Valor, DataOperacao, PrazoDevolucao, MotivoEmprestimo)
+values
+(2, 50, "2022-09-01", 3,"Necessidade"),
+(2, 50, "2022-08-31", 8,"Uniforme");
+
+select * from vw_PessoaDivida;
