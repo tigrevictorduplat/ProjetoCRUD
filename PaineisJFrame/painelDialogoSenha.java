@@ -1,4 +1,4 @@
-package JFrameAssets;
+package PaineisJFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -12,7 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import ConexaoSQL.ConectorBancoDados;
+import ConectorMySQL.ConectorBancoDados;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -40,7 +40,7 @@ public class painelDialogoSenha extends JDialog {
 	 */
 	public painelDialogoSenha() {
 		setType(Type.POPUP);
-		setTitle("Senha de Acesso");
+		setTitle("Acesso ao Banco");
 		setBounds(100, 100, 450, 255);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,7 +84,7 @@ public class painelDialogoSenha extends JDialog {
 				botaoCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
-						janelainicial menuPrincipal = new janelainicial();
+						janelaPrincipal menuPrincipal = new janelaPrincipal();
 						menuPrincipal.voltarAoMenu(menuPrincipal);
 						
 					}
@@ -100,9 +100,9 @@ public class painelDialogoSenha extends JDialog {
 		campoSenha.setBounds(75, 86, 251, 36);
 		contentPanel.add(campoSenha);
 		
-		JLabel instrucaoSenha = new JLabel("Digite abaixo a senha de acesso ao Banco de Dados:");
+		JLabel instrucaoSenha = new JLabel("Escreva abaixo a senha para acessar o Banco");
 		instrucaoSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		instrucaoSenha.setFont(new Font("Georgia", Font.BOLD, 14));
+		instrucaoSenha.setFont(new Font("Calibri", Font.BOLD, 16));
 		instrucaoSenha.setBounds(10, 40, 416, 36);
 		contentPanel.add(instrucaoSenha);
 	}

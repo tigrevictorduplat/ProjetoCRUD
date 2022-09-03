@@ -1,12 +1,24 @@
 package ClassesPrincipais.PastaPET;
 
 public class PETs {
-    private int idPET, idadePET;
-    private String nomePET, descricaoPET, comidaFavoritaPET, tipoPET;    
+    private int idPET,idDonoPET, idadePET;
+    private String nomePET, tipoPET, descricaoPET, comidaFavoritaPET;    
     //Construtores
+    
+
     public PETs(int idadePET, String nomePET, String descricaoPET, String comidaFavoritaPET) {
         this.idadePET = idadePET;
         this.nomePET = nomePET;
+        this.descricaoPET = descricaoPET;
+        this.comidaFavoritaPET = comidaFavoritaPET;
+    }
+
+    public PETs(int idPET, int idDonoPET, int idadePET, String nomePET, String tipoPET, String descricaoPET, String comidaFavoritaPET) {
+        this.idPET = idPET;
+        this.idDonoPET = idDonoPET;
+        this.idadePET = idadePET;
+        this.nomePET = nomePET;
+        this.tipoPET = tipoPET;
         this.descricaoPET = descricaoPET;
         this.comidaFavoritaPET = comidaFavoritaPET;
     }
@@ -19,6 +31,14 @@ public class PETs {
 
 
     //Getters e Setters
+    public int getIdDonoPET() {
+        return idDonoPET;
+    }
+
+    public void setIdDonoPET(int idDonoPET) {
+        this.idDonoPET = idDonoPET;
+    }
+
     public int getIdPET() {
         return idPET;
     }

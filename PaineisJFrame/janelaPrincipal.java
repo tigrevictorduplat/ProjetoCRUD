@@ -1,4 +1,4 @@
-package JFrameAssets;
+package PaineisJFrame;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class janelainicial extends JFrame {
+public class janelaPrincipal extends JFrame {
 	private JPanel contentPane;
 
 	/**
@@ -21,7 +21,7 @@ public class janelainicial extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					janelainicial menuPrincipal = new janelainicial();
+					janelaPrincipal menuPrincipal = new janelaPrincipal();
 					menuPrincipal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class janelainicial extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public janelainicial() {
+	public janelaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 476, 232);
 		contentPane = new JPanel();
@@ -69,7 +69,7 @@ public class janelainicial extends JFrame {
 		contentPane.add(botaoAbrirAgenda);
 	}
 
-	public  void voltarAoMenu(janelainicial menuPrincipal) {
+	public  void voltarAoMenu(janelaPrincipal menuPrincipal) {
 		dispose();
 		if (!(menuPrincipal.isActive()))
 		{
