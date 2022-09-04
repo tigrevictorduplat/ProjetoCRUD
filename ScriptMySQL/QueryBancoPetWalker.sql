@@ -48,7 +48,7 @@ select * from tb_Dono;
 select * from tb_PET;
 select * from tb_Servico;
 
-create view vw_Dono_PET_Servico as
+create view vw_ChecagemAgenda as
 select
 D.nomeDono as 'Nome do Dono',
 P.nomePET as 'Nome do PET',
@@ -61,4 +61,4 @@ from tb_Dono as D , tb_PET as P, tb_Servico as S
 where D.idDono = P.idDono and
 P.idPET = S.idPET;
 
-select * from vw_Dono_PET_Servico;
+select * from vw_ChecagemAgenda;
