@@ -1,2 +1,0 @@
-# Sobre QuerySql
-Nesta pasta temos a query responsável por *criar o Banco*, as *Tabelas*, definir *Chaves*, adcionar *Pessoas* e *Dívidas*, criar a ***View Pessoa-Divida*** necessária pro funcionamento da tabela.

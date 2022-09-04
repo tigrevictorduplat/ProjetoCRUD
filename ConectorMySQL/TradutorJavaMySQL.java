@@ -12,7 +12,7 @@ import ClassesPrincipais.ClasseView.ChecagemAgenda;
 import ClassesPrincipais.PastaPET.PETs;
 
 public class TradutorJavaMySQL {
-    public List<ChecagemAgenda> listarDividasPorPessoa() {
+    public List<ChecagemAgenda> chamarChecagemAgenda() {
         List<ChecagemAgenda> listaAgenda = new ArrayList<ChecagemAgenda>();
         String sqlScript = "select * from vw_ChecagemAgenda";
         Connection conexao = null;

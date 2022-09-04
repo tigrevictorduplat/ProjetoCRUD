@@ -1,0 +1,2 @@
+# Script MySQL
+Nesta pasta temos a query responsável por *criar o Banco*, as *Tabelas*, definir *Chaves*, adcionar *Donos*, *Pets* e *Serviços*, criar a ***View Checagem Agenda*** necessária pro funcionamento da tabela.
