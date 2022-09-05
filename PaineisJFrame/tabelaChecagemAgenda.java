@@ -84,7 +84,7 @@ public class tabelaChecagemAgenda extends JFrame {
 		tabelaChecagemAgenda.getColumnModel().getColumn(6).setPreferredWidth(115);
 
 		//Chamando a View Checagem de Dados
-		for (ChecagemAgenda cA : crudSql.chamarChecagemAgenda() ) {
+		for (ChecagemAgenda cA : crudSql.chamarFuncaoPessoa() ) {
 			var Dono = cA.getNomeDonoAgenda();
 			var PET = cA.getNomePETAgenda();
 			var Tipo = cA.getTipoPETAgenda();

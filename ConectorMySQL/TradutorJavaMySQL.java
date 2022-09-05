@@ -8,13 +8,14 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import ClassesPrincipais.ClasseView.ChecagemAgenda;
-import ClassesPrincipais.PastaPET.PETs;
+import ClassesPrincipais.FuncaoPessoa;
+import ClassesPrincipais.Pessoa;
 
 public class TradutorJavaMySQL {
-    public List<ChecagemAgenda> chamarChecagemAgenda() {
-        List<ChecagemAgenda> listaAgenda = new ArrayList<ChecagemAgenda>();
-        String sqlScript = "select * from vw_ChecagemAgenda";
+
+    public List<FuncaoPessoa> chamarFuncaoPessoa() {
+        List<FuncaoPessoa> listaFuncaoPessoas = new ArrayList<FuncaoPessoa>();
+        String sqlScript = "select * from vw_FuncaoPessoa";
         Connection conexao = null;
         PreparedStatement queryPreparada = null;
         ResultSet retorno = null;
@@ -24,16 +25,19 @@ public class TradutorJavaMySQL {
             queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlScript);
             retorno = queryPreparada.executeQuery();
             while (retorno.next()) {
-                ChecagemAgenda agendaChecagem = new ChecagemAgenda();
-                agendaChecagem.setNomeDonoAgenda(retorno.getString("Nome do Dono"));
-                agendaChecagem.setNomePETAgenda(retorno.getString("Nome do PET"));
-                agendaChecagem.setTipoPETAgenda(retorno.getString("Tipo do PET"));
-                agendaChecagem.setDescricaoPETAgenda(retorno.getString("Descrição"));
-                agendaChecagem.setPrecoServicoAgenda(retorno.getDouble("Preço do Serviço"));
-                agendaChecagem.setDataMarcadaAgenda(retorno.getDate("Data Marcada"));
-                agendaChecagem.setServicoPrestadoAgenda(retorno.getString("Serviço Prestado"));
+                FuncaoPessoa funcaoPessoa = new FuncaoPessoa();
+                funcaoPessoa.setNomeFP(retorno.getString("Nome"));
+                funcaoPessoa.setCPFFP(retorno.getString("CPF"));
+                funcaoPessoa.setNomeFuncaoFP(retorno.getString("Função"));
+                funcaoPessoa.setEnderecoFP(retorno.getString("Endereço"));
+                Double salario =  retorno.getDouble("Salário");
+                if (!salario.isNaN()) {
+                funcaoPessoa.setSalarioFuncaoFP(retorno.getDouble("Salário"));
+                } else {
+                    funcaoPessoa.setSalarioFuncaoFP(0);
+                }
 
-                listaAgenda.add(agendaChecagem);
+                listaFuncaoPessoas.add(funcaoPessoa);
             }
 
         } catch (Exception e) {
@@ -53,12 +57,12 @@ public class TradutorJavaMySQL {
                 e.printStackTrace();
             }
         }
-        return listaAgenda;
+        return listaFuncaoPessoas;
     }
 
-    public List<PETs> lisataDadosPeTs() {
-        List<PETs> dadosPETs = new ArrayList<PETs>();
-        String sqlScript = "select * from tb_PET";
+    public List<Pessoa> listarPessoas() {
+        List<Pessoa> pessoas = new ArrayList<Pessoa>();
+        String sqlScript = "select * from tb_Pessoa";
         Connection conexao = null;
         PreparedStatement queryPreparada = null;
         ResultSet retorno = null;
@@ -68,15 +72,13 @@ public class TradutorJavaMySQL {
             queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlScript);
             retorno = queryPreparada.executeQuery();
             while (retorno.next()) {
-                PETs instanciaPET = new PETs(
-                        retorno.getInt("idPET"),
-                        retorno.getInt("idDono"),
-                        retorno.getInt("idadePET"),
-                        retorno.getString("nomePET"),
-                        retorno.getString("tipoPET"),
-                        retorno.getString("descricaoPET"),
-                        retorno.getString("comidaFavoritaPET"));
-                dadosPETs.add(instanciaPET);
+                Pessoa pessoa = new Pessoa(
+                        retorno.getString("CPF"),
+                        retorno.getString("nomePessoa"),
+                        retorno.getString("enderecoPessoa")
+                        );
+                  
+                pessoas.add(pessoa);
             }
 
         } catch (Exception e) {
@@ -96,7 +98,7 @@ public class TradutorJavaMySQL {
                 e.printStackTrace();
             }
         }
-        return dadosPETs;
+        return pessoas;
     }
 
     public static void main(String[] args) {
@@ -104,8 +106,13 @@ public class TradutorJavaMySQL {
         String senhaBanco = JOptionPane.showInputDialog(null,
                 "Escreva abaixo a senha para acessar o Banco:", "Senha de Acesso", 2);
         ConectorBancoDados.setSenhaConexao(senhaBanco);
-        for (PETs pets : controladorConexao.lisataDadosPeTs()) {
-            System.out.println("O "+pets.getTipoPET()+" "+ pets.getNomePET()+" ama comer " + pets.getComidaFavoritaPET());
+        for (FuncaoPessoa funcaoPessoa : controladorConexao.chamarFuncaoPessoa()) {
+
+            System.out.print(funcaoPessoa.getNomeFP()+" tem a função de "+ funcaoPessoa.getNomeFuncaoFP());
+            if (funcaoPessoa.getNomeFuncaoFP() == "Professor") {
+                System.out.print("recebe "+funcaoPessoa.getSalarioFuncaoFP());                
+            }
+            System.out.print(" mora em "+funcaoPessoa.getEnderecoFP()+" e seu CPF é "+funcaoPessoa.getCPFFP());
         }
         ConectorBancoDados.setSenhaConexao("");
 
