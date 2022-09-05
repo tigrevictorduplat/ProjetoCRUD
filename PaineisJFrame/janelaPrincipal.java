@@ -13,6 +13,15 @@ import javax.swing.border.EmptyBorder;
 
 public class janelaPrincipal extends JFrame {
 	private JPanel contentPane;
+	private static int escolhaOperacao;
+
+	public static int getEscolhaOperacao() {
+		return escolhaOperacao;
+	}
+
+	public static void setEscolhaOperacao(int escolhaOperacao) {
+		janelaPrincipal.escolhaOperacao = escolhaOperacao;
+	}
 
 	/**
 	 * Launch the application.
@@ -41,12 +50,12 @@ public class janelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel textoTitulo = new JLabel("Sua Agenda PetWalker!");
-		textoTitulo.setFont(new Font("Georgia", Font.PLAIN, 30));
-		textoTitulo.setBounds(49, 10, 323, 79);
+		JLabel textoTitulo = new JLabel("Banco Escolar");
+		textoTitulo.setFont(new Font("Arial", Font.PLAIN, 30));
+		textoTitulo.setBounds(131, 10, 197, 79);
 		contentPane.add(textoTitulo);
 		
-		JButton botaoAbrirAgenda = new JButton("Abrir Agenda");
+		JButton botaoAbrirAgenda = new JButton("Abrir Tabela");
 
 		botaoAbrirAgenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -54,6 +63,7 @@ public class janelaPrincipal extends JFrame {
 				try {
 					dispose();
 					painelDialogoSenha painelSenha = new painelDialogoSenha();
+					janelaPrincipal.setEscolhaOperacao(1);
 					painelSenha.setVisible(true);
 					
 				} catch (Exception ex) {
@@ -63,10 +73,30 @@ public class janelaPrincipal extends JFrame {
 		});
 
 		botaoAbrirAgenda.setFont(new Font("Monospaced", Font.BOLD, 12));
-		botaoAbrirAgenda.setForeground(Color.DARK_GRAY);
-		botaoAbrirAgenda.setBackground(new Color(204, 153, 153));
-		botaoAbrirAgenda.setBounds(131, 119, 197, 31);
+		botaoAbrirAgenda.setForeground(Color.BLACK);
+		botaoAbrirAgenda.setBackground(Color.LIGHT_GRAY);
+		botaoAbrirAgenda.setBounds(10, 121, 197, 31);
 		contentPane.add(botaoAbrirAgenda);
+		
+		JButton botaoInserirCadastro = new JButton("Inserir Cadastro");
+		botaoInserirCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dispose();
+					painelDialogoSenha painelSenha = new painelDialogoSenha();
+					janelaPrincipal.setEscolhaOperacao(2);
+					painelSenha.setVisible(true);
+					
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		botaoInserirCadastro.setForeground(Color.BLACK);
+		botaoInserirCadastro.setFont(new Font("Monospaced", Font.BOLD, 12));
+		botaoInserirCadastro.setBackground(Color.LIGHT_GRAY);
+		botaoInserirCadastro.setBounds(244, 121, 197, 31);
+		contentPane.add(botaoInserirCadastro);
 	}
 
 	public  void voltarAoMenu(janelaPrincipal menuPrincipal) {

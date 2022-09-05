@@ -15,14 +15,17 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import ClassesPrincipais.ClasseView.ChecagemAgenda;
-import ConectorMySQL.TradutorJavaMySQL;
 
-public class tabelaChecagemAgenda extends JFrame {
+import ClassesPrincipais.FuncaoPessoa;
+import ConectorMySQL.TradutorJavaMySQL;
+import java.awt.SystemColor;
+
+public class tabelaFuncaoPessoa extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tabelaChecagemAgenda;
 	private JScrollPane painelTabela;
+	private JButton botaoInserir;
 
 	/**
 	 * Launch the application.
@@ -31,7 +34,7 @@ public class tabelaChecagemAgenda extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					tabelaChecagemAgenda frame = new tabelaChecagemAgenda();
+					tabelaFuncaoPessoa frame = new tabelaFuncaoPessoa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,14 +46,14 @@ public class tabelaChecagemAgenda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public tabelaChecagemAgenda() {
+	public tabelaFuncaoPessoa() {
 		TradutorJavaMySQL crudSql = new TradutorJavaMySQL();
-		setTitle("PET Walker Agenda");
+		setTitle("Função por Pessoa");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 745, 496);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 51, 102));
+		contentPane.setBackground(SystemColor.activeCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -63,7 +66,7 @@ public class tabelaChecagemAgenda extends JFrame {
 		
 		
 		//Criando a Tabela
-		String nomeColunas[] = {"Dono", "PET", "Tipo", "Descrição", "Preço", "Data Marcada", "Serviço Prestado"};
+		String nomeColunas[] = {"Nome", "CPF", "Função", "Endereço", "Salário"};
 		DefaultTableModel modelo = new DefaultTableModel(nomeColunas,0);
 		tabelaChecagemAgenda = new JTable();
 		painelTabela.setViewportView(tabelaChecagemAgenda);
@@ -77,29 +80,20 @@ public class tabelaChecagemAgenda extends JFrame {
 		tabelaChecagemAgenda.getColumnModel().getColumn(3).setPreferredWidth(94);
 		tabelaChecagemAgenda.getColumnModel().getColumn(4).setResizable(false);
 		tabelaChecagemAgenda.getColumnModel().getColumn(4).setPreferredWidth(101);
-		tabelaChecagemAgenda.getColumnModel().getColumn(5).setResizable(false);
-		tabelaChecagemAgenda.getColumnModel().getColumn(5).setPreferredWidth(110);
-		tabelaChecagemAgenda.getColumnModel().getColumn(5).setMaxWidth(250);
-		tabelaChecagemAgenda.getColumnModel().getColumn(6).setResizable(false);
-		tabelaChecagemAgenda.getColumnModel().getColumn(6).setPreferredWidth(115);
 
 		//Chamando a View Checagem de Dados
-		for (ChecagemAgenda cA : crudSql.chamarFuncaoPessoa() ) {
-			var Dono = cA.getNomeDonoAgenda();
-			var PET = cA.getNomePETAgenda();
-			var Tipo = cA.getTipoPETAgenda();
-			var Descricao = cA.getDescricaoPETAgenda();
-			var Preco = cA.getPrecoServicoAgenda();
-			var DataMarcada = cA.getDataMarcadaAgenda();
-			var ServicoPrestado = cA.getServicoPrestadoAgenda();
+		for (FuncaoPessoa FP : crudSql.chamarFuncaoPessoa() ) {
+			var Nome = FP.getNomeFP();
+			var CPF = FP.getCPFFP();
+			var Funcao = FP.getNomeFuncaoFP();
+			var Endereco = FP.getEnderecoFP();
+			var Salario = FP.getSalarioFuncaoFP();
 			Object[] infosLinha ={
-				Dono,
-				PET,
-				Tipo,
-				Descricao,
-				Preco,
-				DataMarcada,
-				ServicoPrestado
+				Nome,
+				CPF,
+				Funcao,
+				Endereco,
+				Salario
 			};
 
 			modelo.addRow(infosLinha);
@@ -110,7 +104,7 @@ public class tabelaChecagemAgenda extends JFrame {
 		tabelaChecagemAgenda.setBackground(new Color(255, 255, 204));
 		tabelaChecagemAgenda.setBorder(new LineBorder(Color.WHITE));
 		
-		JButton botaoRetornar = new JButton("Menu Principal");
+		JButton botaoRetornar = new JButton("Retornar");
 		botaoRetornar.setFont(new Font("Monospaced", Font.ITALIC, 20));
 		botaoRetornar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -119,7 +113,22 @@ public class tabelaChecagemAgenda extends JFrame {
 				menuPrincipal.voltarAoMenu(menuPrincipal);
 			}
 		});
-		botaoRetornar.setBounds(21, 385, 684, 49);
+		botaoRetornar.setBounds(21, 379, 310, 49);
 		contentPane.add(botaoRetornar);
+		
+		botaoInserir = new JButton("Inserir");
+		botaoInserir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				janelaInserirPessoa inserirPessoa = new janelaInserirPessoa();
+				if (!inserirPessoa.isActive()){
+					dispose();
+					inserirPessoa.getLocation(null);
+					inserirPessoa.setVisible(true);
+				}
+			}
+		});
+		botaoInserir.setFont(new Font("Monospaced", Font.ITALIC, 20));
+		botaoInserir.setBounds(375, 379, 310, 49);
+		contentPane.add(botaoInserir);
 	}
 }

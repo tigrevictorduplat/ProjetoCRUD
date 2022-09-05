@@ -15,7 +15,7 @@ public class TradutorJavaMySQL {
 
     public List<FuncaoPessoa> chamarFuncaoPessoa() {
         List<FuncaoPessoa> listaFuncaoPessoas = new ArrayList<FuncaoPessoa>();
-        String sqlScript = "select * from vw_FuncaoPessoa";
+        String sqlScript = "select * from vw_PessoaFuncao;";
         Connection conexao = null;
         PreparedStatement queryPreparada = null;
         ResultSet retorno = null;
@@ -24,18 +24,14 @@ public class TradutorJavaMySQL {
             conexao = ConectorBancoDados.conexaoBanco(ConectorBancoDados.getSenhaConexao());
             queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlScript);
             retorno = queryPreparada.executeQuery();
+
             while (retorno.next()) {
                 FuncaoPessoa funcaoPessoa = new FuncaoPessoa();
                 funcaoPessoa.setNomeFP(retorno.getString("Nome"));
                 funcaoPessoa.setCPFFP(retorno.getString("CPF"));
                 funcaoPessoa.setNomeFuncaoFP(retorno.getString("Função"));
                 funcaoPessoa.setEnderecoFP(retorno.getString("Endereço"));
-                Double salario =  retorno.getDouble("Salário");
-                if (!salario.isNaN()) {
                 funcaoPessoa.setSalarioFuncaoFP(retorno.getDouble("Salário"));
-                } else {
-                    funcaoPessoa.setSalarioFuncaoFP(0);
-                }
 
                 listaFuncaoPessoas.add(funcaoPessoa);
             }
@@ -101,6 +97,35 @@ public class TradutorJavaMySQL {
         return pessoas;
     }
 
+    public void inserirPessoa(Pessoa pessoa, int idFuncao) {
+       
+        String sqlQuery = "insert tb_Pessoa (CPF, idFuncao, nomePessoa, enderecoPessoa) values (?,? ,?, ?);";
+        Connection conexao = null;
+        PreparedStatement queryPreparada = null;
+  
+          try {
+              
+              conexao = ConectorBancoDados.conexaoBanco(ConectorBancoDados.getSenhaConexao());
+              queryPreparada = (PreparedStatement) conexao.prepareStatement(sqlQuery);
+              queryPreparada.setString(1, pessoa.getCPF());
+              queryPreparada.setInt(2,idFuncao);
+              queryPreparada.setString(3, pessoa.getNomePessoa());
+              queryPreparada.setString(4, pessoa.getEnderecoPessoa());
+              queryPreparada.execute();
+
+          } catch (Exception e) {
+              e.getStackTrace();
+          } finally {
+              try {
+                  if (conexao != null) {conexao.close();}
+                  if (queryPreparada != null) {queryPreparada.close();}
+              } catch (Exception e) {
+                  e.getStackTrace();
+              }
+          }
+  
+      }
+
     public static void main(String[] args) {
         TradutorJavaMySQL controladorConexao = new TradutorJavaMySQL();
         String senhaBanco = JOptionPane.showInputDialog(null,
@@ -112,7 +137,7 @@ public class TradutorJavaMySQL {
             if (funcaoPessoa.getNomeFuncaoFP() == "Professor") {
                 System.out.print("recebe "+funcaoPessoa.getSalarioFuncaoFP());                
             }
-            System.out.print(" mora em "+funcaoPessoa.getEnderecoFP()+" e seu CPF é "+funcaoPessoa.getCPFFP());
+            System.out.println(" mora em "+funcaoPessoa.getEnderecoFP()+" e seu CPF é "+funcaoPessoa.getCPFFP());
         }
         ConectorBancoDados.setSenhaConexao("");
 
