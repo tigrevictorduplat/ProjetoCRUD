@@ -18,10 +18,11 @@ import ConectorMySQL.TradutorJavaMySQL;
 
 public class janelaInserirPessoa extends JFrame {
 
-	private JPanel contentPane;
+	private final JPanel contentPane;
 	private JTextField campoNome;
 	private JTextField campoCPF;
 	private JTextField campoEndereco;
+        //Atributo que Define a Função escolhida
 	private static int idFuncaoInserir;
 
 	public static int getIdFuncaoInserir() {
@@ -34,6 +35,7 @@ public class janelaInserirPessoa extends JFrame {
 
 	/**
 	 * Launch the application.
+     * @param args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,7 +54,7 @@ public class janelaInserirPessoa extends JFrame {
 	 * Create the frame.
 	 */
 	public janelaInserirPessoa() {
-		TradutorJavaMySQL crudSql = new TradutorJavaMySQL();
+		final TradutorJavaMySQL crudSql = new TradutorJavaMySQL();
 		setResizable(false);
 		setTitle("Inserir Pessoa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,8 +84,8 @@ public class janelaInserirPessoa extends JFrame {
 		labelNome_2_1.setBounds(10, 205, 66, 36);
 		contentPane.add(labelNome_2_1);
 		
-		JRadioButton radioProfessor = new JRadioButton("Professor");
-		JRadioButton radioAluno = new JRadioButton("Aluno");
+		final JRadioButton radioProfessor = new JRadioButton("Professor");
+		final JRadioButton radioAluno = new JRadioButton("Aluno");
 		
 		//Criando Botão Professor
 		radioProfessor.addActionListener(new ActionListener() {

@@ -9,7 +9,7 @@ public class ConectorBancoDados {
     //Usuário do Banco (root)
     private static final String nomeUsuario = "root";
     //Senha da Conexão
-    private static String senhaConexao;
+    private static String senhaConexao ;
     //Path | Porta Usada /nomedobanco
     private static final String urlConexao = "jdbc:mysql://localhost:3306/bancoescola";
 
@@ -29,7 +29,7 @@ public class ConectorBancoDados {
             Connection conexao = DriverManager.getConnection(urlConexao, nomeUsuario, senhaConexao);
             return conexao;        
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Tivesmos problemas de conexão!", "Conexão Interrompida",2);
+            JOptionPane.showMessageDialog(null, "Tivemos problemas de conexão!", "Conexão Interrompida",2);
             e.getStackTrace();
         }
         return null;

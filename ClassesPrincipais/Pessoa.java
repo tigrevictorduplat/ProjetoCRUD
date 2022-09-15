@@ -9,10 +9,10 @@ public class Pessoa {
     
 
     //Construtores
-    public Pessoa(String CPF, String nomeDono, String enderecoDono) {
+    public Pessoa(String CPF, String nomePessoa, String enderecoPessoa) {
         this.CPF = CPF;
-        this.nomePessoa = nomeDono;
-        this.enderecoPessoa = enderecoDono;
+        this.nomePessoa = nomePessoa;
+        this.enderecoPessoa = enderecoPessoa;
     }
 
     // Getters e Setters

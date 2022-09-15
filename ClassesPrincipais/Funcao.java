@@ -5,7 +5,7 @@ public class Funcao {
     private String nomeFuncao;
     private double salarioFuncao;
 
-    //Construtores
+    //Construtores - Polimorfismo
     public Funcao(int idFuncao, String nomeFuncao, double salarioFuncao) {
         this.idFuncao = idFuncao;
         this.nomeFuncao = nomeFuncao;

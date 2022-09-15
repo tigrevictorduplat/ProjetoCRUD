@@ -8,8 +8,8 @@ public class FuncaoPessoa {
     public String getCPFFP() {
         return CPFFP;
     }
-    public void setCPFFP(String cPFFP) {
-        CPFFP = cPFFP;
+    public void setCPFFP(String CPFFP) {
+        this.CPFFP = CPFFP;
     }
     public String getNomeFP() {
         return nomeFP;
