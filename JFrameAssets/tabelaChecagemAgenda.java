@@ -1,4 +1,4 @@
-package PaineisJFrame;
+package JFrameAssets;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import ClassesPrincipais.ClasseView.ChecagemAgenda;
-import ConectorMySQL.TradutorJavaMySQL;
+import ConexaoSQL.PonteJavaSQL;
 
 public class tabelaChecagemAgenda extends JFrame {
 
@@ -44,7 +44,7 @@ public class tabelaChecagemAgenda extends JFrame {
 	 * Create the frame.
 	 */
 	public tabelaChecagemAgenda() {
-		TradutorJavaMySQL crudSql = new TradutorJavaMySQL();
+		PonteJavaSQL crudSql = new PonteJavaSQL();
 		setTitle("Histórico dos Devedores");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,25 +96,21 @@ public class tabelaChecagemAgenda extends JFrame {
 		tabelaChecagemAgenda.getColumnModel().getColumn(6).setResizable(false);
 		tabelaChecagemAgenda.getColumnModel().getColumn(6).setPreferredWidth(115);
 
-		//Resgatando dados da View DividaPessoa
-		
-		//"Dono", "PET", "Tipo", "Descrição", "Preço", "Data Marcada", "Serviço Prestado"
+		//Resgatando dados da View DividaPessoa 
 		for (ChecagemAgenda cA : crudSql.listarDividasPorPessoa() ) {
-			var Dono = cA.getNomeDonoAgenda();
-			var PET = cA.getNomePETAgenda();
-			var Tipo = cA.getTipoPETAgenda();
-			var Descricao = cA.getDescricaoPETAgenda();
-			var Preco = cA.getPrecoServicoAgenda();
-			var DataMarcada = cA.getDataMarcadaAgenda();
-			var ServicoPrestado = cA.getServicoPrestadoAgenda();
+			var id = cA.getIdPessoaDivida();
+			var nome = cA.getNomePessoaDivida();
+			var valor = cA.getValorPessoaDivida();
+			var filiacao = cA.getFiliacaoPessoaDivida();
+			var prazo = cA.getPrazoDiasPessoaDivida();
+			var data = cA.getDataOperacaoPessoaDivida();
 			Object[] infosLinha ={
-				Dono,
-				PET,
-				Tipo,
-				Descricao,
-				Preco,
-				DataMarcada,
-				ServicoPrestado
+				id,
+				nome,
+				valor,
+				filiacao,
+				prazo,
+				data
 			};
 
 			modelo.addRow(infosLinha);
@@ -130,7 +126,7 @@ public class tabelaChecagemAgenda extends JFrame {
 		botaoRetornar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				janelaPrincipal menuPrincipal = new janelaPrincipal();
+				janelainicial menuPrincipal = new janelainicial();
 				menuPrincipal.voltarAoMenu(menuPrincipal);
 			}
 		});

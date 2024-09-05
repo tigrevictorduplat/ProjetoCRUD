@@ -1,4 +1,4 @@
-package ConectorMySQL;
+package ConexaoSQL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ public class ConectorBancoDados {
     //Usuário do Banco (root)
     private static final String nomeUsuario = "root";
     //Senha da Conexão
-    private static String senhaConexao;
+    private static String senhaConexao = "MYSQL.Ence1@dus#001" ;
     //Path | Porta Usada /nomedobanco
     private static final String urlConexao = "jdbc:mysql://localhost:3306/petwalker";
 
