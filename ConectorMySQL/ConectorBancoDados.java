@@ -11,7 +11,7 @@ public class ConectorBancoDados {
     //Senha da Conexão
     private static String senhaConexao;
     //Path | Porta Usada /nomedobanco
-    private static final String urlConexao = "jdbc:mysql://localhost:3306/bancoescola";
+    private static final String urlConexao = "jdbc:mysql://localhost:3306/petwalker";
 
     //Getters e Setters
     public static String getSenhaConexao() {

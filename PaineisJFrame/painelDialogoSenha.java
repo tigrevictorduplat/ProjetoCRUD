@@ -59,26 +59,13 @@ public class painelDialogoSenha extends JDialog {
 							String senhaInput = String.valueOf(campoSenha.getPassword());
 							if(senhaInput.isEmpty()==false){
 								ConectorBancoDados.setSenhaConexao(senhaInput);
-								tabelaFuncaoPessoa janelaTabela = new tabelaFuncaoPessoa();
-								janelaInserirPessoa inserirPessoa = new janelaInserirPessoa();
-								switch (janelaPrincipal.getEscolhaOperacao()) {
-									case 1:
-									if (!janelaTabela.isActive()){
-										dispose();
-										janelaTabela.getLocation(null);
-										janelaTabela.setVisible(true);
-									}
-									break;
-									
-									case 2:
-									if (!inserirPessoa.isActive()){
-										dispose();
-										inserirPessoa.getLocation(null);
-										inserirPessoa.setVisible(true);
-									}
-									break;
-								} 
-						}else {JOptionPane.showMessageDialog(null, "Digite uma senha!", "Campo Nulo",2);}
+								dispose();
+								tabelaChecagemAgenda janelaTabela = new tabelaChecagemAgenda();
+								if (!(janelaTabela.isActive())){
+									janelaTabela.getLocation(null);
+									janelaTabela.setVisible(true);
+								}
+							} else {JOptionPane.showMessageDialog(null, "Digite uma senha!", "Campo Nulo",2);}
 						}catch (Exception ex) {
 							ex.getStackTrace();
 						}
@@ -113,9 +100,9 @@ public class painelDialogoSenha extends JDialog {
 		campoSenha.setBounds(75, 86, 251, 36);
 		contentPanel.add(campoSenha);
 		
-		JLabel instrucaoSenha = new JLabel("Digite aqui a senha do Banco de Dados");
+		JLabel instrucaoSenha = new JLabel("Escreva abaixo a senha para acessar o Banco");
 		instrucaoSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		instrucaoSenha.setFont(new Font("Arial", Font.BOLD, 16));
+		instrucaoSenha.setFont(new Font("Calibri", Font.BOLD, 16));
 		instrucaoSenha.setBounds(10, 40, 416, 36);
 		contentPanel.add(instrucaoSenha);
 	}
