@@ -81,13 +81,13 @@ public class tabelaFuncaoPessoa extends JFrame {
 		tabelaChecagemAgenda.getColumnModel().getColumn(4).setResizable(false);
 		tabelaChecagemAgenda.getColumnModel().getColumn(4).setPreferredWidth(101);
 
-		//Chamando a View Checagem de Dados - For each
+		//Chamando a View Checagem de Dados
 		for (FuncaoPessoa FP : crudSql.chamarFuncaoPessoa() ) {
-			String Nome = FP.getNomeFP();
-			String CPF = FP.getCPFFP();
-			String Funcao = FP.getNomeFuncaoFP();
-			String Endereco = FP.getEnderecoFP();
-			Double Salario = FP.getSalarioFuncaoFP();
+			var Nome = FP.getNomeFP();
+			var CPF = FP.getCPFFP();
+			var Funcao = FP.getNomeFuncaoFP();
+			var Endereco = FP.getEnderecoFP();
+			var Salario = FP.getSalarioFuncaoFP();
 			Object[] infosLinha ={
 				Nome,
 				CPF,
