@@ -4,25 +4,19 @@ public class Pessoa {
     private String CPF;
     private String nomePessoa;
     private String enderecoPessoa;
-    private int idFuncao;
     
-    
-
     //Construtores
+    public Pessoa(String nomeDono, String enderecoDono) {
+        this.nomePessoa = nomeDono;
+        this.enderecoPessoa = enderecoDono;
+    }
+
     public Pessoa(String CPF, String nomeDono, String enderecoDono) {
         this.CPF = CPF;
         this.nomePessoa = nomeDono;
         this.enderecoPessoa = enderecoDono;
     }
 
-    // Getters e Setters
-public int getIdFuncao() {
-        return idFuncao;
-    }
-
-    public void setIdFuncao(int idFuncao) {
-        this.idFuncao = idFuncao;
-    }
     public String getCPF() {
         return CPF;
     }
