@@ -45,7 +45,7 @@ public class tabelaChecagemAgenda extends JFrame {
 	 */
 	public tabelaChecagemAgenda() {
 		TradutorJavaMySQL crudSql = new TradutorJavaMySQL();
-		setTitle("PET Walker Agenda");
+		setTitle("Histórico dos Devedores");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 745, 496);
@@ -67,7 +67,20 @@ public class tabelaChecagemAgenda extends JFrame {
 		DefaultTableModel modelo = new DefaultTableModel(nomeColunas,0);
 		tabelaChecagemAgenda = new JTable();
 		painelTabela.setViewportView(tabelaChecagemAgenda);
-		tabelaChecagemAgenda.setModel(modelo);
+		tabelaChecagemAgenda.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Dono", "PET", "Tipo", "Descri\u00E7\u00E3o", "Pre\u00E7o", "Data Marcada", "Servi\u00E7o Prestado"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		tabelaChecagemAgenda.getColumnModel().getColumn(0).setResizable(false);
 		tabelaChecagemAgenda.getColumnModel().getColumn(0).setPreferredWidth(68);
 		tabelaChecagemAgenda.getColumnModel().getColumn(1).setResizable(false);
@@ -83,8 +96,10 @@ public class tabelaChecagemAgenda extends JFrame {
 		tabelaChecagemAgenda.getColumnModel().getColumn(6).setResizable(false);
 		tabelaChecagemAgenda.getColumnModel().getColumn(6).setPreferredWidth(115);
 
-		//Chamando a View Checagem de Dados
-		for (ChecagemAgenda cA : crudSql.chamarChecagemAgenda() ) {
+		//Resgatando dados da View DividaPessoa
+		
+		//"Dono", "PET", "Tipo", "Descrição", "Preço", "Data Marcada", "Serviço Prestado"
+		for (ChecagemAgenda cA : crudSql.listarDividasPorPessoa() ) {
 			var Dono = cA.getNomeDonoAgenda();
 			var PET = cA.getNomePETAgenda();
 			var Tipo = cA.getTipoPETAgenda();
